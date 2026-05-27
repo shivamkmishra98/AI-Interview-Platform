@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { LogOut, Play, Clock, Award, BarChart3, ChevronRight, Video, Terminal, User as UserIcon, Trophy, Search, Activity, Sparkles, Cpu, Zap, Network, Flame, Trash2, X } from 'lucide-react';
+import { LogOut, Play, Clock, Award, BarChart3, ChevronRight, Video, Terminal, User as UserIcon, Trophy, Search, Activity, Sparkles, Cpu, Zap, Network, Flame, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 

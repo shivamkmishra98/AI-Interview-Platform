@@ -22,6 +22,7 @@ const VoiceInterview = () => {
   const [showWebcam, setShowWebcam] = useState(true);
   const [isThinking, setIsThinking] = useState(false);
   const [voicesLoaded, setVoicesLoaded] = useState(false);
+  const [isConversationInitialized, setIsConversationInitialized] = useState(false);
 
   const videoRef = useRef(null);
   const streamRef = useRef(null);
@@ -65,24 +66,29 @@ const VoiceInterview = () => {
     // Start Webcam
     startWebcam();
 
+    // Capture refs at effect time
+    const currentSynthRef = synthRef.current;
+    const currentRecognitionRef = recognitionRef.current;
+
     return () => {
       stopWebcam();
-      if (synthRef.current) {
-        synthRef.current.cancel();
+      if (currentSynthRef) {
+        currentSynthRef.cancel();
       }
-      if (recognitionRef.current) {
-        recognitionRef.current.stop();
+      if (currentRecognitionRef) {
+        currentRecognitionRef.stop();
       }
     };
   }, [id, navigate]);
 
   useEffect(() => {
-    if (!isLoading && interview && conversation.length === 0 && voicesLoaded) {
+    if (!isLoading && interview && !isConversationInitialized && voicesLoaded) {
       // Start the conversation
       const greeting = `Hello there! I'm your AI interviewer today, and I'll be taking your mock interview for the ${interview.jobRole} position. How are you feeling today? Are you ready to begin?`;
       setConversation([{ role: 'ai', content: greeting }]);
+      setIsConversationInitialized(true);
     }
-  }, [isLoading, interview, voicesLoaded]);
+  }, [isLoading, interview, voicesLoaded, isConversationInitialized]);
 
   // Separate effect to handle speaking when conversation updates
   useEffect(() => {

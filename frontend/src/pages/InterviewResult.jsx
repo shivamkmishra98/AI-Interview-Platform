@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Award, Target, BrainCircuit, ArrowLeft, MessageSquare, ThumbsUp, AlertTriangle, Lightbulb, Sparkles } from 'lucide-react';
@@ -21,7 +21,7 @@ const InterviewResult = () => {
         
         setResult(res.data.data);
         setIsLoading(false);
-      } catch (err) {
+      } catch {
         setError('Failed to load interview results');
         setIsLoading(false);
       }

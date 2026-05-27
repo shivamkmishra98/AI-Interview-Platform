@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { Timer, Send, ChevronRight, ChevronLeft, AlertCircle, Cpu, FileText, Sparkles } from 'lucide-react';
+import { Timer, Send, ChevronRight, ChevronLeft, CheckCircle2, AlertCircle, Cpu, FileText, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ActiveInterview = () => {
@@ -56,7 +56,7 @@ const ActiveInterview = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft, isLoading, isSubmitting, id, answers, navigate]);
+  }, [timeLeft, isLoading, isSubmitting, handleSubmit]);
 
   const formatTime = (seconds) => {
     const m = Math.floor(seconds / 60);
@@ -82,7 +82,7 @@ const ActiveInterview = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
     setIsSubmitting(true);
     try {
       const token = localStorage.getItem('token');
@@ -97,7 +97,7 @@ const ActiveInterview = () => {
       toast.error(err.response?.data?.error || 'Failed to submit interview');
       setIsSubmitting(false);
     }
-  };
+  }, [id, answers, navigate]);
 
   if (isLoading) {
     return (

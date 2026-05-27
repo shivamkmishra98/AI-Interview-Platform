@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { ChevronDown, ArrowLeft, Code2, PlayCircle, ShieldCheck, Layout, FileText, Settings, Sparkles } from 'lucide-react';
+import { Terminal, ChevronDown, ArrowLeft, Code2, PlayCircle, ShieldCheck, Layout, FileText, Settings, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const LANGUAGE_BOILERPLATES = {
