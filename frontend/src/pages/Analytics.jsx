@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
@@ -20,7 +20,7 @@ const Analytics = () => {
         
         setData(res.data.data);
         setIsLoading(false);
-      } catch (err) {
+      } catch {
         setError('Failed to load analytics data');
         setIsLoading(false);
       }

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { Play, CheckCircle2, ChevronDown, Terminal, ArrowLeft, Code2, PlayCircle, ShieldCheck, Cpu, Layout, FileText, Settings, Sparkles } from 'lucide-react';
+import { ChevronDown, ArrowLeft, Code2, PlayCircle, ShieldCheck, Layout, FileText, Settings, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const LANGUAGE_BOILERPLATES = {

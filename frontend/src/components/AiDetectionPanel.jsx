@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { ShieldAlert, CheckCircle, AlertTriangle, Fingerprint, RefreshCw, ShieldCheck } from 'lucide-react';
+import { ShieldAlert, AlertTriangle, Fingerprint, RefreshCw, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AiDetectionPanel = ({ question, answer }) => {

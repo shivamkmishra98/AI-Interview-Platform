@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
@@ -67,21 +67,31 @@ const VoiceInterview = () => {
 
     return () => {
       stopWebcam();
-      synthRef.current.cancel();
+      if (synthRef.current) {
+        synthRef.current.cancel();
+      }
       if (recognitionRef.current) {
         recognitionRef.current.stop();
       }
     };
-  }, [id]);
+  }, [id, navigate]);
 
   useEffect(() => {
     if (!isLoading && interview && conversation.length === 0 && voicesLoaded) {
       // Start the conversation
       const greeting = `Hello there! I'm your AI interviewer today, and I'll be taking your mock interview for the ${interview.jobRole} position. How are you feeling today? Are you ready to begin?`;
       setConversation([{ role: 'ai', content: greeting }]);
-      speakText(greeting);
     }
   }, [isLoading, interview, voicesLoaded]);
+
+  // Separate effect to handle speaking when conversation updates
+  useEffect(() => {
+    if (conversation.length > 0 && conversation[conversation.length - 1].role === 'ai') {
+      const lastMessage = conversation[conversation.length - 1].content;
+      speakText(lastMessage);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [conversation]);
 
   const startWebcam = async () => {
     try {
